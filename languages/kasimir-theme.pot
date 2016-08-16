@@ -1,0 +1,260 @@
+# Copyright (C) 2016 kasimir-theme
+# This file is distributed under the same license as the kasimir-theme package.
+msgid ""
+msgstr ""
+"Project-Id-Version: kasimir-theme\n"
+"Report-Msgid-Bugs-To: http://www.fleg.de\n"
+"POT-Creation-Date: 2016-08-15 20:23+0100\n"
+"PO-Revision-Date: 2016-08-15 20:24+0100\n"
+"Last-Translator: Florian Egermann <florian@macht-medien.de>\n"
+"Language-Team: Florian <hallo@fleg.de>\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.7.5\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: 404.php:18
+msgid "Oops! That page can&rsquo;t be found."
+msgstr "Ups! Die Seite wurde nicht gefunden. "
+
+#: 404.php:22
+msgid ""
+"It looks like nothing was found at this location. Maybe try one of the links "
+"below or a search?"
+msgstr "Nichts wurde gefunden. Versuche die Verweise oder eine Suche. "
+
+#: 404.php:34
+msgid "Most Used Categories"
+msgstr "Meist genutzte Kategorien"
+
+#: 404.php:52
+#, php-format
+msgid "Try looking in the monthly archives. %1$s"
+msgstr "Versuch in den monatlichen Archiven nachzusehen. %1$s"
+
+#: comments.php:31
+#, php-format
+msgctxt "comments title"
+msgid "One thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] "Ein Beitrag zu &ldquo;%2$s&rdquo;"
+msgstr[1] "%1$s Beiträge zu &ldquo;%2$s&rdquo;"
+
+#: comments.php:40 comments.php:61
+msgid "Comment navigation"
+msgstr "Kommentar-Navigation"
+
+#: comments.php:43 comments.php:64
+msgid "Older Comments"
+msgstr "Ältere Kommentare"
+
+#: comments.php:44 comments.php:65
+msgid "Newer Comments"
+msgstr "Neuere Kommenatere"
+
+#: comments.php:78
+msgid "Comments are closed."
+msgstr "Kommentare sind geschlossen."
+
+#: functions.php:49
+msgid "Primary Menu"
+msgstr "Hauptmenü"
+
+#: functions.php:97
+msgid "Widgets footer (grey)"
+msgstr "Widgets-Fusszeile (Grau)"
+
+#: functions.php:98
+msgid "Widgets footer (purple)"
+msgstr "Widgets-Fusszeile (Lila)"
+
+#: functions.php:99
+msgid "Widgets footer (blue)"
+msgstr "Widgets-Fusszeile (Blau)"
+
+#: functions.php:100
+msgid "Widgets left column"
+msgstr "Widgets linke Spalte"
+
+#: functions.php:108
+#, php-format
+msgid "Widget area for %s"
+msgstr "Widget-Bereich für %s"
+
+#: header.php:29
+msgid "Skip to content"
+msgstr "Zum Inhalt springen"
+
+#: header.php:40
+msgid "Menu"
+msgstr "Menu"
+
+#: inc/customizer.php:22
+msgid "Footer Customization"
+msgstr "Fusszeile Anpassungen"
+
+#: inc/customizer.php:37
+msgid "Copyright Text"
+msgstr "Copyright Text"
+
+#: inc/customizer.php:38
+msgid "The copyright text will be displayed beneath the menu in the footer."
+msgstr ""
+"Dieser Copyright-Text wird unterhalb des Menüs in der Fusszeile angezeigt. "
+
+#: inc/template-tags.php:28
+#, php-format
+msgctxt "post date"
+msgid "%s"
+msgstr "%s"
+
+#: inc/template-tags.php:33
+#, php-format
+msgctxt "post author"
+msgid "by %s"
+msgstr "von %s"
+
+#: inc/template-tags.php:50 inc/template-tags.php:56
+msgid ", "
+msgstr ", "
+
+#: inc/template-tags.php:52
+#, php-format
+msgid "Posted in %1$s"
+msgstr "Veröffentlicht in %1$s"
+
+#: inc/template-tags.php:58
+#, php-format
+msgid "Tagged %1$s"
+msgstr "Mit %1$s verschlagwortet"
+
+#: inc/template-tags.php:64
+#, fuzzy
+msgid "Leave a comment"
+msgstr "Kommentar hinterlassen"
+
+#: inc/template-tags.php:64
+msgid "1 Comment"
+msgstr "1 Kommentar"
+
+#: inc/template-tags.php:64
+msgid "% Comments"
+msgstr "% Kommentare"
+
+#: inc/template-tags.php:71 template-parts/content-page.php:33
+#, fuzzy, php-format
+msgid "Edit %s"
+msgstr "%s bearbeiten "
+
+#: inc/template-tags.php:140
+msgid "Please define default parameters in the form of an array."
+msgstr "Bitte definier die Standard-Parameter als Array."
+
+#: inc/template-tags.php:145
+msgid "Please define an SVG icon filename."
+msgstr "Bitte SVG-Dateinamen definieren"
+
+#: inc/template-tags.php:364
+msgid "Share This"
+msgstr "Beitrag teilen"
+
+#: inc/template-tags.php:368 inc/template-tags.php:369
+msgid "Share on Twitter"
+msgstr "Auf Twitter telen"
+
+#: inc/template-tags.php:374 inc/template-tags.php:375
+msgid "Share on Facebook"
+msgstr "Auf Facebook teilen"
+
+#: inc/template-tags.php:380 inc/template-tags.php:381
+msgid "Share on LinkedIn"
+msgstr "Auf LinkedIn teilen"
+
+#: inc/template-tags.php:430
+msgid "No posts found"
+msgstr "Keine Beiträge gefunden"
+
+#: inc/template-tags.php:505
+#, fuzzy
+msgid "No categories"
+msgstr "Kategorien"
+
+#: inc/template-tags.php:508
+#, fuzzy
+msgid "Categories"
+msgstr "Kategorien"
+
+#: search.php:20
+#, php-format
+msgid "Search Results for: %s"
+msgstr "Ergebnisse für %s"
+
+#: searchform.php:2
+msgid "To search this site, enter a search term"
+msgstr "Suchwörter eingeben, um diese Website zu durchsuchen."
+
+#: searchform.php:3
+#, fuzzy
+msgctxt ""
+msgid "Search"
+msgstr "Suchen"
+
+#: searchform.php:4
+msgid "Submit"
+msgstr "Absenden"
+
+#: template-parts/content-compact.php:28 template-parts/content.php:35
+#, php-format
+msgid "Continue reading %s <span class=\"meta-nav\">&rarr;</span>"
+msgstr "Weiter lesen %s <span class=\"meta-nav\">&rarr;</span>"
+
+#: template-parts/content-compact.php:33 template-parts/content-page.php:22
+#: template-parts/content.php:40
+msgid "Pages:"
+msgstr "Seiten:"
+
+#: template-parts/content-none.php:14
+msgid "Nothing Found"
+msgstr "Nichts gefunden"
+
+#: template-parts/content-none.php:21
+#, php-format
+msgid ""
+"Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "Fertig zum Publizieren? <a href=\"%1$s\">Lege hier los</a>."
+
+#: template-parts/content-none.php:25
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
+msgstr ""
+"Deine Suchbegriffe wurden nicht gefunden. Bitte versuche es mit anderen "
+"Schlüsselwörtern erneut. "
+
+#: template-parts/content-none.php:31
+msgid ""
+"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
+"searching can help."
+msgstr "Wir haben nicht gefunden wonach du suchst. Eine Suche könnte helfen"
+
+#~ msgid "Social Links"
+#~ msgstr "Links zu sozialen Netzwerken"
+
+#~ msgid ""
+#~ "These are the settings for social links. Please limit the number of "
+#~ "social links to 5."
+#~ msgstr ""
+#~ "Dies sind die Einstellungen für die Links in soziale Netzwerke. Bitte "
+#~ "beschränke Sie auf 5. "
+
+#~ msgid "%s Link"
+#~ msgstr "%s Link"
