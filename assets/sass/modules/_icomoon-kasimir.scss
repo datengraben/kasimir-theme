@@ -1,0 +1,68 @@
+//--------------------------------------------------------------
+// Icon Font - used for Navigation Manu
+//--------------------------------------------------------------
+
+
+@font-face {
+  font-family: 'icomoon-kasimir';
+  src:  url('assets/icon-font/icomoon-kasimir.eot?lfltyh');
+  src:  url('assets/icon-font/icomoon-kasimir.eot?lfltyh#iefix') format('embedded-opentype'),
+    url('assets/icon-font/icomoon-kasimir.ttf?lfltyh') format('truetype'),
+    url('assets/icon-font/icomoon-kasimir.woff?lfltyh') format('woff'),
+    url('fonts/icomoon-kasimir.svg?lfltyh#icomoon-kasimir') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon-kasimir' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-user:before {
+  content: "\f007";
+}
+.icon-close:before {
+  content: "\f00d";
+}
+.icon-remove:before {
+  content: "\f00d";
+}
+.icon-times:before {
+  content: "\f00d";
+}
+.icon-align-justify:before {
+  content: "\f039";
+}
+.icon-arrow-left:before {
+  content: "\f060";
+}
+.icon-arrow-right:before {
+  content: "\f061";
+}
+.icon-chevron-up:before {
+  content: "\f077";
+}
+.icon-chevron-down:before {
+  content: "\f078";
+}
+.icon-bars:before {
+  content: "\f0c9";
+}
+.icon-navicon:before {
+  content: "\f0c9";
+}
+.icon-reorder:before {
+  content: "\f0c9";
+}
+

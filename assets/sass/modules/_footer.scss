@@ -1,0 +1,86 @@
+//--------------------------------------------------------------
+// Footer
+//--------------------------------------------------------------
+//
+
+.widgets-footer {
+	font-weight: normal;
+	padding: $padding-large 0;
+
+
+	ul {
+		@include list-reset;
+	}
+	&.widgets-footer-top {
+		background: $color-kasimir-blue;
+		color: $color-kasimir-light-blue ;
+	}	
+	&.widgets-footer-middle {
+		background: $color-kasimir-green;
+		color: $color-black;
+		padding: $padding-mini 0;
+
+		a {
+			color: $color-black;
+		}
+
+		.widget_text {
+			text-align: center;
+			margin-bottom: 0;
+			@include fill-parent;			
+		}
+		.widget-title {
+			display: inline;
+			margin-right: $padding-mini;
+			transform: rotate(0deg);
+		}
+		.textwidget {
+			display: inline;
+
+		}
+	}
+	&.widgets-footer-bottom {
+		background: $color-kasimir-grey;
+		color: $color-kasimir-blue;
+		.widget-title {
+			font-size: 1em;
+			transform: rotate(0deg);
+  			font-family: $font-headline;
+  			text-transform: none;
+		}
+		img, .icon {
+		height: 70px;
+		display: inline;		
+		opacity: 0.5;
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+	.icon {
+		width: 70px;
+		fill: $color-kasimir-light-blue;
+	}
+	}
+
+
+	a {
+		color: $color-white;
+		&:hover {
+			color: $color-black;
+		}
+	}
+
+}
+
+.site-footer {
+	.site-info {
+		padding: $padding-mini;
+		color: $color-kasimir-blue;
+		a {
+			color: $color-kasimir-light-blue;
+
+		}
+	}
+	background: $color-kasimir-grey;
+}

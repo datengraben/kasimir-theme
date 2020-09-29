@@ -1,0 +1,241 @@
+//--------------------------------------------------------------
+// Navigation
+//--------------------------------------------------------------
+
+.secondary.navigation-area {
+		@include media($tablet-portrait) {
+
+  			transform: rotate(-1deg);
+  		}
+  }
+
+// Links
+a {
+	color: $color-link;
+	text-decoration: none;
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: $color-link-hover;
+	}
+}
+
+.cb-button {
+	color: $color-white !important;
+}
+
+#content .content-area a {
+
+}
+
+// Navicon Toggle
+.menu-toggle {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	display: block;
+	margin: 0 auto;
+	line-height: $navbar-height;
+	height: $navbar-height;
+	width: $navbar-height;
+ 	font-size: 32px;
+	font-family: 'icomoon-kasimir';
+  	@extend .icon-navicon;
+  	color: black;
+	background: transparent;
+
+	&[aria-expanded="true"]{
+		@extend .icon-close;
+		color: white;
+
+	}
+
+	.menu-toggle-text {
+		display: inline-block;
+		vertical-align: middle;
+		color: $color-black;
+		display: none;
+	}
+
+	&:hover, &:focus {
+		background-color: transparent;
+	}
+
+	@include media($tablet-portrait) {
+		display: none;
+	}
+}
+
+// Main navigation container
+.main-navigation {
+
+	@include transition(all 0.5s ease);
+	@include size(100% auto);
+	clear: both;
+	display: block;
+	padding: 0 $padding-mini;
+	background: none;
+
+	// Menu area
+	ul {
+		display: none;
+		@include media($tablet-portrait) {
+			display: inline-block;
+			width: auto;
+			margin: 0 auto;
+		}
+	}
+
+	// Mobile  toggled only
+	&.toggled {
+
+		@include z-index('modal');
+		max-height: 1000px;
+		height: 100%;	
+		@include size(100% auto);
+		position: absolute;
+		top: 0px;
+		left: 0;
+		bottom: 0;
+		padding-top: 30px;
+		background: $color-kasimir-blue;
+		ul {
+			display: block;
+			opacity: 1;
+			text-align: center;
+			margin-top: $navbar-height;
+
+			li {
+				@include size(100% auto);
+				line-height: $navbar-height;
+				background: $color-white;
+				&:hover {
+				}
+				ul.sub-menu {
+	  			@include position(relative, 0 null null null);
+					left: 0;
+				}
+			}
+		}
+	}
+}
+
+// Menu defaults
+.menu {
+
+	&.horizontal {
+		li {
+				display: inline-block;		
+			}
+	}
+
+	// non-mobile only 
+	&[aria-expanded="false"]{
+	  font-family: $font-headline;
+	  text-transform: uppercase;
+	  line-height: 1.1em;
+	}
+
+	@include list-reset;
+
+	li {
+		margin: 0 rem(20) rem(10) 0;
+		a {
+			color: $color-blue;
+			&:hover {
+				color: $color-kasimir-purple;
+			}
+		}
+	}
+
+	ul {
+		@include list-reset;
+	}
+
+	&.dropdown {
+		// Sub-menu
+		ul {
+			float: left;		
+			padding: $padding-small /2;
+
+			// Sub-sub menu
+			ul {
+				left: rem(-9999);
+				top: 0;
+			}
+
+			// Sub-menu items
+			li {
+
+				&:hover > ul,
+				&.focus > ul {
+					left: 100%;
+				}
+			}
+
+			// Sub-menu links
+			a {
+				@include size(rem(200) auto);
+			}
+
+			:hover > a,
+			.focus > a {
+			}
+
+			a:hover,
+			a.focus {
+			}
+		}
+
+		// Display sub-menu on hover
+		li:hover > ul,
+		li.focus > ul {
+			left: auto;
+		}
+
+		// Menu items
+		li {
+			position: relative;
+
+			&:hover > a,
+			&.focus > a {
+			}
+		}
+	}
+
+	// Menu hyperlinks
+	a {
+		display: block;
+		text-decoration: none;
+	}
+
+	// Current items
+	.current_page_item a,
+	.current-menu-item a {
+	}
+}
+
+// Other navigation
+.comment-navigation,
+.posts-navigation,
+.post-navigation {
+
+	.site-main & {
+		margin: 0 0 $padding-small 0;
+		overflow: hidden;
+	}
+
+	& .nav-previous {
+		@include size(50% auto);
+
+		float: left;
+	}
+
+	& .nav-next {
+		@include size(50% auto);
+
+		float: right;
+		text-align: right;
+	}
+}

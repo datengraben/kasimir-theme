@@ -1,0 +1,19 @@
+//--------------------------------------------------------------
+// WTranslate Widget
+//--------------------------------------------------------------
+
+
+	.qtranxs_widget {
+		@include media(max-width $tablet-portrait) {
+			text-align: center;
+		ul {
+			list-style: none;
+			padding: 0;
+			display: inline;
+			li {
+				text-align: center;
+				display: inline;
+			}
+		}
+	}
+}

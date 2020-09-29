@@ -1,0 +1,32 @@
+/*
+Theme Name: kasimir-theme
+Theme URI: http://www.kasimir-lastenrad.de
+Author: Florian Egermann
+Author URI: http://www.fleg.de
+Description: Theme für KASIMIR - Dein Lastenrad
+Version: 1.0.1
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: kasimir-theme
+Tags: 2-col, widget-ready
+
+This theme, like WordPress, is licensed under the GPL.
+
+Based on Underscores http://underscores.me/, (C) 2012-2016 Automattic, Inc.
+
+Normalizing styles have been helped along thanks to the fine work of
+Bo-Yi Wu (https://github.com/appleboy/), Nicolas Gallagher (https://github.com/necolas), and Jonathan Neal (https://github.com/jonathantneal).
+*/
+
+@import "bourbon";
+@import "utilities/variables/index";
+@import "neat";
+@import "utilities/mixins/index";
+@import "utilities/animate/index";
+
+@import "base/index";
+@import "structure/index";
+@import "modules/index";
+@import "plugins/index";
+@import "views/index";
+@import "widgets/index";

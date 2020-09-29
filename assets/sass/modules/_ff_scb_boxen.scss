@@ -1,0 +1,12 @@
+.ff-scb-contentboxes {
+    @include fill-parent;
+    @include clearfix;
+    .widget {
+      img {
+        max-width: 100%;
+      }
+    @include media($tablet-landscape) {
+      @include span-columns(4);
+    }
+  }
+}

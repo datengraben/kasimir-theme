@@ -1,0 +1,60 @@
+//--------------------------------------------------------------
+// Article Grid
+//--------------------------------------------------------------
+//
+
+div.articlegrid {
+	@include clearfix;
+	margin-bottom: $padding-large * 2;
+	div {
+
+  		@include span-columns(9 of 9);
+
+    @include media($phone-landscape) {
+        @include span-columns(4 of 9);
+        @include omega(2n);
+
+      }    
+      @include media($tablet-portrait) {
+        @include omega-reset(2n);
+	  		@include span-columns(3 of 9);
+	  		@include omega(3n);
+
+	  	}
+
+  		position: relative;
+  		padding-bottom: 0;
+  		border-radius: $border-radius;
+  		margin-bottom: 0;
+  		height: 180px;
+  		overflow: hidden;
+
+
+  		div {
+  			width: 100%;
+  			background-size: cover;
+  			background-position: center;
+  			display:table;
+
+
+  			&:hover {
+  				opacity: 0.8;
+  			}
+
+  			a {
+  				display: block;
+  				height: 100%;
+  				display: table-cell;
+
+				span {
+					@extend .imageheadline;
+					padding: $padding-small;
+  				}
+  			}
+  		}
+
+  		.articlegrid-label {
+;
+  		}
+	}
+}

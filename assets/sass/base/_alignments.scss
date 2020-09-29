@@ -1,0 +1,23 @@
+//--------------------------------------------------------------
+// Alignments
+//--------------------------------------------------------------
+
+.alignleft {
+	display: inline;
+	float: left;
+	margin: 0 $padding-small 0 0;
+}
+
+.alignright {
+	display: inline;
+	float: right;
+	margin: 0 0 0 $padding-small;
+}
+
+.aligncenter {
+	@include margin-auto;
+}
+
+.aligncenterall {
+	@include centerer;
+}

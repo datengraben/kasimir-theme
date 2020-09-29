@@ -1,0 +1,29 @@
+//--------------------------------------------------------------
+// Header
+//--------------------------------------------------------------
+
+.site-header {
+	background-size: cover;
+	height: 400px;
+}
+
+.site-branding {
+  text-align: center;
+  @include media($tablet-portrait) {
+  	padding-left: $padding-mini;
+  	text-align: left;
+  }
+}
+
+.site-title {
+	font-size: rem(24);
+  font-family: $font-headline;
+  text-transform: uppercase;
+  line-height: 1.1em;	margin-left: 0;
+}
+
+.site-description {
+	display: none;
+	font-size: rem(24);
+	margin: 0 0 $padding-small 0;
+}

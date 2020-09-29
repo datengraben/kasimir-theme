@@ -1,0 +1,18 @@
+.category-nav {
+	background: $color-kasimir-light-blue;
+	padding: $padding-mini;
+	border-radius: $border-radius;
+	margin-bottom: $padding-small;
+	li {
+		padding: 0;
+		margin: 0;
+	}
+	ul {
+		display: inline-block;
+		margin: 0 0 0 $padding-small;
+		li {
+			padding: 0;
+			margin: 0;
+		}
+	}
+}

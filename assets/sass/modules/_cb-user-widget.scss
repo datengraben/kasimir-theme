@@ -1,0 +1,25 @@
+.widget_cb_user_widget {
+	padding: $padding-mini;
+	text-align: center;
+	margin-left: 10px !important;
+	margin-top: $padding-mini !important;
+	margin-right: $padding-small !important;
+	border-radius: $border-radius;
+
+	@include media($tablet-portrait) {
+		background: $color-kasimir-light-blue;
+		text-align: left;
+	}
+
+	ul {
+		list-style: none;
+		padding: 0;
+		display: inline;
+		li {
+			display: inline;
+			&:before {
+				content: ' ';
+			}
+		}
+	}
+}

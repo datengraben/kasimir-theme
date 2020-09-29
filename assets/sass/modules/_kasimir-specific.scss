@@ -1,0 +1,28 @@
+//--------------------------------------------------------------
+// Special styles only for kasimir-lastenrad.de
+//--------------------------------------------------------------
+
+#site-navigation {
+	#menu-item-104 {
+		margin-bottom: $padding-small;
+	}
+}
+
+.page-template-page-home {
+	h1.entry-title {
+		display: none;
+	}
+}
+
+.articlegrid.cb_items {
+	span {
+		background-color: rgba( $color-kasimir-purple, 0.8)  ;
+	}
+}
+
+.site-branding img {
+	@include transition(transform 0.3s ease);
+	&:hover {
+		transform: rotate(-2deg);
+	}
+}

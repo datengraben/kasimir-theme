@@ -1,0 +1,64 @@
+//--------------------------------------------------------------
+// HTML Elements
+//--------------------------------------------------------------
+
+// Iframes
+
+embed,
+iframe,
+object {
+	max-width: 100%;
+}
+
+hr {
+	@include size(auto 1px);
+
+	background-color: $color-background-hr;
+	border: 0;
+	margin: 0 0 $padding-small 0;
+}
+
+figure {
+	margin: 0;
+}
+
+// Lists
+
+ul,
+ol {
+	margin: 0 0 $padding-large 0;
+}
+
+ul {
+	list-style: disc;
+}
+
+ol {
+	list-style: decimal;
+}
+
+li > ul,
+li > ol {
+	margin: 0;
+	padding: 0;
+}
+
+dt {
+	font-weight: 700;
+}
+
+dd {
+	margin: 0 $padding-small $padding-small 0;
+}
+
+// Tables
+
+table {
+	@include size(100% auto);
+	
+	margin: 0 0 $padding-small 0;
+}
+
+th {
+	font-weight: 700;
+}

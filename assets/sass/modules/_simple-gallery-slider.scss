@@ -1,0 +1,41 @@
+/*
+* Custom styles for https://github.com/flegfleg/simple-wp-gallery-slider 
+*/
+
+
+.bx-wrapper {
+	border-radius: $border-radius;
+	margin-bottom: $padding-large * 2;
+	li {
+		overflow: hidden;
+	}
+	img {
+		
+	}
+	a {
+		@include z-index('slider-controls');
+		color: $color-white;
+	}
+
+	.bx-controls-direction {
+			a.bx-prev, a.bx-next { 
+				opacity: 0.5;
+		}
+	}
+
+	.bx-caption {
+		@extend .imageheadline;
+		font-size: 1.5em;
+
+		@include media($tablet-portrait) {
+			font-size: 2.5em;
+		}
+
+		span {
+			border-radius: $border-radius;
+			display: inline-block;
+			font-weight: normal;
+			color: $color-white;
+		}
+	}
+}
