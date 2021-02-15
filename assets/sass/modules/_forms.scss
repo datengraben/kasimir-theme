@@ -71,6 +71,7 @@ input::-moz-focus-inner { // Corrects inner padding and border displayed oddly i
 	padding: 0;
 }
 
+
 input[type="text"],
 input[type="email"],
 input[type="url"],
@@ -89,11 +90,10 @@ input[type="color"],
 textarea {
 	-webkit-appearance: none; // Remove iOS styles
 	color: $color-input-text;
-	border: none;
 	background: $color-white;
 	line-height: 1.45;
 	padding: rem(3) rem(5);
-
+	border: 1px solid $color-kasimir-green;
 	&:focus {
 		color: $color-input-focus-text;
 	}
