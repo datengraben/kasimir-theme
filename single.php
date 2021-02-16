@@ -9,7 +9,6 @@
 
 get_header(); ?>
 
-	<div class="wrap">
 		<div class="primary content-area">
 			<main id="main" class="site-main" role="main">
 			<?php
@@ -29,8 +28,6 @@ get_header(); ?>
 
 			</main><!-- #main -->
 		</div><!-- .primary -->
-
-	</div><!-- .wrap -->
 	
 	</div><!-- .wrap (header.php) -->
 
