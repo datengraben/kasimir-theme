@@ -150,3 +150,40 @@ require get_template_directory() . '/inc/jetpack.php';
  * Load styles and scripts.
  */
 require get_template_directory() . '/inc/scripts.php';
+
+
+/**
+ * DasAllrad Theme specialities
+ */
+
+/**
+ * This adds a filter to send all booking confirmations to one email adress.
+ */
+function da_cb_return_location_mail( $value ){
+    return 'datengraben@gmx.de';
+}
+add_filter('commonsbooking_tag_cb_location__cb_location_email', 'da_cb_return_location_mail' );
+
+/**
+ * This adds a notice div to the booking and item page to send an template email
+ */
+add_action( 'commonsbooking_before_item-single', 'da_add_reparatur_mail' );
+function da_add_reparatur_mail() {
+	global $templateData;
+	$itemName = $templateData['post']->post_title;
+	echo "<div class=\"cb-notice\"> <p>Funktioniert etwas vor oder nach Fahrt nicht, kontaktiere unsere Werkstatt und schreibe eine <a href=\"mailto:werkstatt@dasallrad.org?subject=Mangelmeldung bei%20" . $itemName . "&body=Hallo Werkstatt-Team, bei meiner Buchung mit%20" . $itemName . "%20hatte ich folgendes Problem:%0D%0A%0D%0ADanke und Gruß\">Mail über unsere Vorlage.</a></p></div>";
+
+}
+add_action( 'commonsbooking_before_booking-single', 'da_add_booking_reparatur_mail' );
+function da_add_booking_reparatur_mail() {
+	global $post;
+
+	if (get_current_user_id() == $post->post_author) {
+
+		$booking = new \CommonsBooking\Model\Booking( $post->ID );
+		$bookingUrl = site_url() . "/cb_booking" . $post->post_name . "/";
+
+		echo "<div class=\"cb-notice\"> <p>Melde technische Probleme während der Fahrt via <a href=\"mailto:werkstatt@dasallrad.org?subject=Mangelmeldung%20" . $booking->getItem()->post_title . "&body=Hallo Werkstatt-Team, bei meiner Buchung hatte ich folgendes Problem:%0D%0A%0D%0ABuchungs URL:%20" . $bookingUrl . "%0D%0A%0D%0ADanke und Gruß\">Mail über unsere Vorlage.</a></p></div>";
+
+	}
+}
