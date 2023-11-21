@@ -116,6 +116,232 @@ function kasimir_widgets_init() {
 }
 add_action( 'widgets_init', 'kasimir_widgets_init' );
 
+
+add_filter('edit_profile_url', 'my_edit_profile_url', 10, 3);
+function my_edit_profile_url($url, $user_id, $scheme) {
+	if ( current_user_can( 'activate_plugins' ) ) {
+		return $url;
+	}
+    return home_url('/user/');
+}
+
+/*****************************************/
+/** UNGENUZT *****************************/
+/*** HIER FOLGT EIN ABSCHNITT ************/
+/*** INDEM ICH ETWAS AUSPROBIER HABE *****/
+/*****************************************/
+
+/**
+ * Returns true if a user_id has a given role or capability
+ * 
+ * @param int $user_id
+ * @param string $role_or_cap Role or Capability
+ * 
+ * @return boolean
+ */
+function my_has_role($user_id, $role_or_cap) {
+
+    $u = new \WP_User( $user_id );
+    //$u->roles Wrong way to do it as in the accepted answer.
+    $roles_and_caps = $u->get_role_caps(); //Correct way to do it as wp do multiple checks to fetch all roles
+
+    if( isset ( $roles_and_caps[$role_or_cap] ) and $roles_and_caps[$role_or_cap] === true ) 
+       {
+           return true;
+       }
+ }
+
+/**
+ * Das sollte nicht-admins auf die /dashboard Seite verweisen (funtkioniert aber nicht und wird auch nicht genutzt)
+ */
+function cb_prevent_subscriber() {
+	
+	$is_cb_manager = my_has_role( get_current_user_id(), 'subscriber' );
+	
+	if ( ! ( is_admin() || $is_cb_manager ) ) { 
+		// || in_array('cb_manager', wp_get_current_user()->roles) ) ) { 
+		// // in_array( 'subscriber', (array) $user->roles ) ) {
+		    wp_redirect( home_url( '/dashboard' ), 302 );
+		    exit();
+			// exit( wp_safe_redirect( '/dashboard' ) );
+	}
+    //if( ! current_user_can( 'switch_themes' ) )
+	//} 
+}
+
+// add_action( 'load-index.php', 'cb_prevent_subscriber');
+// add_action( 'load-profile.php', 'cb_prevent_subscriber');
+// add_action( 'load-user-edit.php', 'cb_prevent_subscriber');
+
+
+/*****************************************/
+/**************** ABSCHNITT END **********/
+/*****************************************/
+
+
+/**** BEGIN WARTUNGS_EMAIL *****/
+
+function _generate_wartung( $itemName, $bookingUrl ) {
+	
+	$url = "";
+	if ( isset( $bookingUrl ) ) {
+		$url = "Buchungs URL:%20" . $bookingUrl . "%0D%0A%0D%0A";
+	}
+	
+	return "<div class=\"cb-notice\"> <p>Melde technische Probleme während der Fahrt via <a href=\"mailto:werkstatt@dasallrad.org?subject=Mangelmeldung%20bei%20" . $itemName . "&body=Hallo Werkstatt-Team, bei meiner Buchung von " . $itemName . " hatte ich folgendes Problem:%0D%0A%0D%0A" . $url . "Danke und Gruß\">Mail über unsere Vorlage.</a></p></div>";
+}
+
+add_action( 'commonsbooking_before_item-single', 'da_add_reparatur_mail' );
+function da_add_reparatur_mail() {
+	global $templateData;
+	$itemName = $templateData['post']->post_title;
+	
+	if ( is_user_logged_in() ) {
+		echo _generate_wartung( $itemName, null );
+	}
+}
+
+add_action( 'commonsbooking_before_booking-single', 'da_add_booking_reparatur_mail' );
+function da_add_booking_reparatur_mail() {
+	global $post;
+	
+	if (get_current_user_id() == $post->post_author) {
+		
+		$booking = new \CommonsBooking\Model\Booking( $post->ID );
+		$bookingUrl = site_url() . "/cb_booking/" . $post->post_name . "/";
+		
+		echo _generate_wartung( $booking->getItem()->post_title, $bookingUrl );
+	
+	}
+}
+/**** END   WARTUNGS_EMAIL *****/
+
+
+/**** BEGIN BELIEBTE ARTIKEL der letzten 30 tage ****/
+/**
+ * TODO availability tomorrow
+ */
+function commonsbooking_popular_items() {
+
+	// Entwicklung auskommentieren
+	// delete_transient( 'dasallrad_popular_items' );
+	
+	if ( false === ( $featured = get_transient( 'dasallrad_popular_items' ) ) ) {
+	
+	$startTime = strtotime( '- 14 days' );
+	$endTime   = strtotime( '+ 14 days' );
+	
+	$args = array(
+			'post_type'   => \CommonsBooking\Wordpress\CustomPostType\Booking::$postType,
+			// 'posts_per_page' => $perPage,
+			// 'paged' => $page,
+			'nopaging' => true,
+			'orderby' => 'meta_value_num',
+		    'meta_key' => \CommonsBooking\Model\Timeframe::REPETITION_START,
+			// 'order' => 'ASC',
+			'meta_query'  => array(
+				'relation' => 'AND',
+				array(
+					'key'     => \CommonsBooking\Model\Timeframe::REPETITION_START,
+					'value'   => $startTime,
+					'compare' => '>=',
+					'type'    => 'numeric',
+				),
+				array(
+					'key'     => \CommonsBooking\Model\Timeframe::REPETITION_END,
+					'value'   => $endTime,
+					'compare' => '<=',
+					'type'    => 'numeric',
+				),
+				/*array(
+					'key'     => \CommonsBooking\Model\Timeframe::META_LOCATION_ID,
+					'value'   => 21479,
+					'compare' => '=',
+				),*/
+				/*array(
+					'key'     => \CommonsBooking\Model\Timeframe::META_ITEM_ID,
+					'value'   => 21799,
+					'compare' => '=',
+				),*/
+				array(
+					'key'     => 'type',
+					'value'   => \CommonsBooking\Wordpress\CustomPostType\Timeframe::BOOKING_ID,
+					'compare' => '=',
+				),
+			),
+		); 
+	
+	$query = new WP_Query( $args );
+	$models = array_map( function( $elem ) {
+		return new \CommonsBooking\Model\Booking( $elem );
+	}, $query->posts );
+	
+	// Counts bookings per Item
+	$count_of_items = array();
+		
+	// Counts different user per booking per item
+	$count_of_users_to_item = array();
+	
+	foreach ($models as $model) {
+
+		$itemId = intval( get_post_meta( $model->ID, 'item-id', true ) );
+		$userId = intval( $model->post_author );
+		
+		if ( ! array_key_exists( $itemId, $count_of_items ) ) {
+			$count_of_items[ $itemId ] = 1;
+			$count_of_users_to_item[ $itemId ] = array( $userId );
+		} else {
+			$count_of_items[ $itemId ] = $count_of_items[ $itemId ] + 1;
+			if ( ! in_array( $userId, $count_of_users_to_item[ $itemId ] ) ) {
+				array_push( $count_of_users_to_item[ $itemId ], $userId );
+			}
+		}
+	}
+		
+	// Flatten userIds per Item (array) -> to get distinct user per item
+	$result = array();
+	foreach ($count_of_users_to_item as $item => $arrOfUsers) {
+		$result[ $item ] = count( $arrOfUsers );
+	}
+	
+	// Comparison function
+	function cmp($a, $b) {
+    	if ($a == $b) {
+        	return 0;
+    	}
+    	return ($a > $b) ? -1 : 1;
+	}
+	
+	// Sort by key
+	$objs = new ArrayObject( $result );
+	$objs->uasort('cmp');
+
+		
+	$maxResult = 5;
+	$i = 1;
+	$print = '';
+	foreach ($objs as $id => $val) {
+		if ($i <= $maxResult) {
+			$item = new \CommonsBooking\Model\Item( $id );
+			$item_name =  $item->post_title;			
+		    $print .= '<figure class="cb-items-teaser wp-caption alignleft"><a href="'.get_permalink($item->ID).'">';
+		    $print .= get_the_post_thumbnail($item->ID,'thumbnail');
+		    $print .= '</a><figcaption class="wp-caption-text"><span class="green">' . $i . '. ' .$item_name.'</span></figcaption></figure>';
+		}
+		$i++;
+	}
+		
+		// Put the results in a transient. Expire after 12 hours.
+		set_transient( 'dasallrad_popular_items', $print, 72 * HOUR_IN_SECONDS );
+		return $print;
+	} else {
+		return get_transient( 'dasallrad_popular_items' );
+	}
+}
+add_shortcode( 'cb_popular_items', 'commonsbooking_popular_items');
+/**** END   BELIEBTE ARTIKEL ****/
+
+
 /**
  * Implement the Custom Header feature.
  */
@@ -150,40 +376,3 @@ require get_template_directory() . '/inc/jetpack.php';
  * Load styles and scripts.
  */
 require get_template_directory() . '/inc/scripts.php';
-
-
-/**
- * DasAllrad Theme specialities
- */
-
-/**
- * This adds a filter to send all booking confirmations to one email adress.
- */
-function da_cb_return_location_mail( $value ){
-    return 'datengraben@gmx.de';
-}
-add_filter('commonsbooking_tag_cb_location__cb_location_email', 'da_cb_return_location_mail' );
-
-/**
- * This adds a notice div to the booking and item page to send an template email
- */
-add_action( 'commonsbooking_before_item-single', 'da_add_reparatur_mail' );
-function da_add_reparatur_mail() {
-	global $templateData;
-	$itemName = $templateData['post']->post_title;
-	echo "<div class=\"cb-notice\"> <p>Funktioniert etwas vor oder nach Fahrt nicht, kontaktiere unsere Werkstatt und schreibe eine <a href=\"mailto:werkstatt@dasallrad.org?subject=Mangelmeldung bei%20" . $itemName . "&body=Hallo Werkstatt-Team, bei meiner Buchung mit%20" . $itemName . "%20hatte ich folgendes Problem:%0D%0A%0D%0ADanke und Gruß\">Mail über unsere Vorlage.</a></p></div>";
-
-}
-add_action( 'commonsbooking_before_booking-single', 'da_add_booking_reparatur_mail' );
-function da_add_booking_reparatur_mail() {
-	global $post;
-
-	if (get_current_user_id() == $post->post_author) {
-
-		$booking = new \CommonsBooking\Model\Booking( $post->ID );
-		$bookingUrl = site_url() . "/cb_booking" . $post->post_name . "/";
-
-		echo "<div class=\"cb-notice\"> <p>Melde technische Probleme während der Fahrt via <a href=\"mailto:werkstatt@dasallrad.org?subject=Mangelmeldung%20" . $booking->getItem()->post_title . "&body=Hallo Werkstatt-Team, bei meiner Buchung hatte ich folgendes Problem:%0D%0A%0D%0ABuchungs URL:%20" . $bookingUrl . "%0D%0A%0D%0ADanke und Gruß\">Mail über unsere Vorlage.</a></p></div>";
-
-	}
-}
