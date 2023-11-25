@@ -390,12 +390,12 @@ function dasallrad_erste_buchung() {
 	
 	// Make them aware of general info for the booking process
 	if ( $numberOfSuccessfulBookings == 0 ) {
-		echo "<p style=\"font-weight: 100; font-size: 1rem; margin-bottom: 5px;\"><span style=\"font-size: 1.5rem; margin-right: 5px;\">🐣</span>Das ist deine erste Buchung, denke daran die Leihvereinbarung zu lesen.</p>";
+		echo "<p style=\"font-weight: 100; font-size: 1rem; margin-bottom: 5px;\"><span style=\"font-size: 1.5rem; margin-right: 5px;\">🐣</span>Das ist deine erste Buchung, denke daran die <a href=\"https://dasallrad.org\">Leihvereinbarung</a> zu lesen.</p>";
 	} 
 	
 	//  And optionally, make the aware of specialities for this item 
 	if ( $isItemChallenging ) {
-		echo "<p style=\"font-weight: 100; font-size: 1rem; margin-bottom: 5px;\"><span style=\"font-size: 1.8rem; margin-right: 5px;\">🦏</span>Du hast ein ALLrad gewählt, welches herausfordernd in der Bedingung ist! Achte auf eine sichere Fahrweise.</p>";
+		echo "<p style=\"font-weight: 100; font-size: 1rem; margin-bottom: 5px;\"><span style=\"font-size: 1.8rem; margin-right: 5px;\">🦏</span>Du hast ein ALLrad gewählt, welches herausfordernd in der Bedienung ist! Achte auf eine sichere Fahrweise.</p>";
 	}
 	
 	echo "</div>";
