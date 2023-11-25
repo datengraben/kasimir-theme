@@ -24,6 +24,7 @@ function kasimir_setup() {
 	 * You will also need to update the Gulpfile with the new text domain
 	 * and matching destination POT file.
 	 */
+	
 	load_theme_textdomain( 'kasimir-theme', get_template_directory() . '/languages' );
 
 	// Add default posts and comments RSS feed links to head.
@@ -68,6 +69,8 @@ function kasimir_setup() {
 	add_image_size('kasimir-logo', 160, 140);
 	add_image_size('kasimir-content-image', 720, 400);
 	add_image_size('kasimir-articlegrid-image', 210, 210);
+	
+	do_action( 'qm/debug', is_writable('/tmp'));
 
 }
 endif; // kasimir_setup
@@ -340,6 +343,65 @@ function commonsbooking_popular_items() {
 }
 add_shortcode( 'cb_popular_items', 'commonsbooking_popular_items');
 /**** END   BELIEBTE ARTIKEL ****/
+
+add_action( 'commonsbooking_after_booking-single', 'dasallrad_erste_buchung' );
+function dasallrad_erste_buchung() {
+	
+	global $post;
+	
+	// If its the first booking for a user
+	$numberOfSuccessfulBookings = (new WP_Query(
+		array(
+			'author' 	=> get_current_user_id(),
+			'post_status'   => array( 'confirmed' ),
+			'post_type'   => \CommonsBooking\Wordpress\CustomPostType\Booking::$postType,
+			'meta_query'    => array(
+				'relation'  => 'AND',
+				array(
+					'key'     => \CommonsBooking\Model\Timeframe::REPETITION_END,
+					'value'   => strtotime( 'now' ),
+					'compare' => '<=',
+					'type'    => 'numeric',
+				)
+			)
+		)
+	))->found_posts;
+	
+	$booking = new \CommonsBooking\Model\Booking( $post->ID );	
+	$result = new WP_Query(
+		array(
+			'post_type'   => \CommonsBooking\Wordpress\CustomPostType\Item::$postType,
+			'tax_query' => array(
+				array(
+					'taxonomy' => 'cb_items_category',
+					'field' => 'slug',
+					'terms' => 'herausfordernd'
+				)
+			),
+			'post__in'  => array( $booking->getItem()->ID )
+		)
+	);
+	$isItemChallenging = $result->found_posts > 0;
+	
+	if ( $numberOfSuccessfulBookings == 0 || $isItemChallenging ) {
+	
+	echo "<div class=\"cb-notice\" style=\"padding-bottom: 10px;\">";
+	echo "<p style=\"margin-top: 15px; margin-bottom: 5px;\">Hinweise:</p>";
+	
+	// Make them aware of general info for the booking process
+	if ( $numberOfSuccessfulBookings == 0 ) {
+		echo "<p style=\"font-weight: 100; font-size: 1rem; margin-bottom: 5px;\"><span style=\"font-size: 1.5rem; margin-right: 5px;\">🐣</span>Das ist deine erste Buchung, denke daran die Leihvereinbarung zu lesen.</p>";
+	} 
+	
+	//  And optionally, make the aware of specialities for this item 
+	if ( $isItemChallenging ) {
+		echo "<p style=\"font-weight: 100; font-size: 1rem; margin-bottom: 5px;\"><span style=\"font-size: 1.8rem; margin-right: 5px;\">🦏</span>Du hast ein ALLrad gewählt, welches herausfordernd in der Bedingung ist! Achte auf eine sichere Fahrweise.</p>";
+	}
+	
+	echo "</div>";
+		
+	}
+}
 
 
 /**
