@@ -249,7 +249,7 @@ function da_add_booking_reparatur_mail() {
 
 /**** BEGIN BELIEBTE ARTIKEL der letzten 30 tage ****/
 /**
- * TODO availability tomorrow
+ * 
  */
 function commonsbooking_popular_items() {
 
