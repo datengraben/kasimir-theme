@@ -429,6 +429,7 @@ function dasallrad_erste_buchung() {
 	$result = new WP_Query(
 		array(
 			'post_type'   => \CommonsBooking\Wordpress\CustomPostType\Item::$postType,
+			'post_status' => 'publish',
 			'tax_query' => array(
 				array(
 					'taxonomy' => 'cb_items_category',
