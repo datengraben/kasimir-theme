@@ -153,7 +153,27 @@ function da_leichtesprache_inhalt_erweitern_am_ende($content) {
 // Den Filter-Hook 'the_content' verwenden, um die Funktion aufzurufen
 add_filter('the_content', 'da_leichtesprache_inhalt_erweitern_am_ende');
 
-
+add_shortcode( 'pll_allrad', 'allrad_lang_switch' );
+function allrad_lang_switch( $atts, $content = "" ) {
+	
+	$slug = pll_current_language();
+	
+	$url = '/leichte-sprache/';
+	$content = 'Leichte Sprache';
+	
+	if ($slug == 'leichte-sprache') {
+	    $url = '/';
+	    $content = 'Alltags Sprache';		
+	}
+	
+	
+	
+	return '<a href="' . $url . '">
+<div style="display: flex; align-items: center; /* Vertically centers both the SVG and text */gap: 5px; /* Space between the SVG and text */">
+<svg style="height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 26.461 31.981" aria-hidden="true"><polygon points="13.662 12.923 13.662 31.981 26.461 26.932 26.461 7.874 13.662 12.923" style="fill:currentColor"></polygon><polygon points="0 26.932 12.799 31.981 12.799 12.923 0 7.874 0 26.932" style="fill:currentColor"></polygon><path d="M18.1415,4.9847a4.9845,4.9845,0,1,1-4.985-4.985,4.98518,4.98518,0,0,1,4.985,4.985" style="fill:currentColor"></path></svg>
+<span style="padding-left: 5px">' . $content . '</span></div></a>';
+		// TODO irgendwann erlauben direkt auf die übersetzte Seite zu springen ... hier fehlt noch das icon ansonsten habe ich alles und noch die Prüfung ob die Seite existiert... pll_the_languages(['hide_current' => 1]);
+}
 
 /*****************************************/
 /** UNGENUZT *****************************/
