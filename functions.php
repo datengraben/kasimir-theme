@@ -444,7 +444,7 @@ function dasallrad_erste_buchung() {
 	
 	if ( $numberOfSuccessfulBookings == 0 || $isItemChallenging ) {
 	
-	echo "<div class=\"cb-notice\" style=\"padding-bottom: 10px;\">";
+	echo "<div id=\"cb_info_hints\" class=\"cb-notice\" style=\"padding-bottom: 10px;\">";
 	echo "<p style=\"margin-top: 15px; margin-bottom: 5px;\">Hinweise:</p>";
 	
 	// Make them aware of general info for the booking process
