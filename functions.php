@@ -128,6 +128,33 @@ function my_edit_profile_url($url, $user_id, $scheme) {
     return home_url('/user/');
 }
 
+
+
+/** Erweitert den Inhalt um Quellen-Angaben für Leichte Sprache Inhalte */
+function da_leichtesprache_inhalt_erweitern_am_ende($content) {
+    // Prüfen, ob wir uns im Haupt-Loop befinden und ob der Inhalt ein einzelner Beitrag oder eine Seite ist.
+    if (is_singular() && in_the_loop() && is_main_query()) {
+        // Der Text, der ans Ende des Inhalts hinzugefügt werden soll
+
+		if ( pll_current_language() == 'leichte-sprache' ) {
+			$zusatztext = '<p> Bilder: © Lebenshilfe für Menschen mit geistiger Behinderung Bremen e.V.,'
+				. 'Illustrator: Stefan Albers, Atelier Fleetinsel, 2013</p>'
+				. '<p>Text: © Büro für Einfache und Leichte Sprache der Lebenshilfe Gießen e.V.,'
+				. 'Übersetzerin: Anja Sandtner, 2024</p>';
+			
+			// Den Zusatztext ans Ende des Inhalts hängen
+			$content .= $zusatztext;
+		}
+    }
+
+    return $content;
+}
+
+// Den Filter-Hook 'the_content' verwenden, um die Funktion aufzurufen
+add_filter('the_content', 'da_leichtesprache_inhalt_erweitern_am_ende');
+
+
+
 /*****************************************/
 /** UNGENUZT *****************************/
 /*** HIER FOLGT EIN ABSCHNITT ************/
