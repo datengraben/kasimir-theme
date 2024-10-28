@@ -352,11 +352,42 @@ function commonsbooking_popular_items() {
 	$print = '';
 	foreach ($objs as $id => $val) {
 		if ($i <= $maxResult) {
+			
+			// Check if items has timeframes
+			$timeframes = \CommonsBooking\Repository\Timeframe::getInRangeForCurrentUser(
+				strtotime( 'now' ),
+				strtotime( '+ 3 days' ),
+				[],
+				[ $id ],
+				[ \CommonsBooking\Wordpress\CustomPostType\Timeframe::BOOKABLE_ID ],
+				true
+			);
+			
+			if ( ! $timeframes ) {
+				continue;
+			}
+			
 			$item = new \CommonsBooking\Model\Item( $id );
-			$item_name =  $item->post_title;			
+			
+			// Skip if no thumbnail available (glitches layout)
+			if ( ! get_the_post_thumbnail($item->ID,'thumbnail') ) {
+				continue;
+			}
+			
+			$item_name =  $item->post_title;
+			$attr = array(
+				'alt'   => "Thumbnail das den Artikel " . $item_name . " zeigt."
+			);
+
 		    $print .= '<figure class="cb-items-teaser wp-caption alignleft"><a href="'.get_permalink($item->ID).'">';
-		    $print .= get_the_post_thumbnail($item->ID,'thumbnail');
+		    $print .= get_the_post_thumbnail( 
+				$item->ID, 
+				'thumbnail', 
+				$attr
+			);
 		    $print .= '</a><figcaption class="wp-caption-text"><span class="green">' . $i . '. ' .$item_name.'</span></figcaption></figure>';
+		} else {
+			break;
 		}
 		$i++;
 	}
