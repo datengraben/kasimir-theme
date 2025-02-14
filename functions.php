@@ -367,7 +367,7 @@ function _generate_wartung( $itemName, $bookingUrl ) {
 	return "<div id=\"cb_info_mail\" class=\"cb-notice\"> <p>Melde technische Probleme während der Fahrt via <a href=\"mailto:werkstatt@dasallrad.org?subject=Mangelmeldung%20bei%20" . $itemName . "&body=Hallo Werkstatt-Team, bei meiner Buchung von " . $itemName . " hatte ich folgendes Problem:%0D%0A%0D%0A" . $url . "Danke und Gruß\">Mail über unsere Vorlage.</a></p></div>";
 }
 
-add_action( 'commonsbooking_before_item-single', 'da_add_reparatur_mail' );
+add_action( 'commonsbooking_after_item-single', 'da_add_reparatur_mail' );
 function da_add_reparatur_mail() {
 	global $templateData;
 	$itemName = $templateData['post']->post_title;
@@ -377,7 +377,7 @@ function da_add_reparatur_mail() {
 	}
 }
 
-add_action( 'commonsbooking_before_booking-single', 'da_add_booking_reparatur_mail' );
+add_action( 'commonsbooking_after_booking-single', 'da_add_booking_reparatur_mail' );
 function da_add_booking_reparatur_mail() {
 	global $post;
 	
