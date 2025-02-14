@@ -147,10 +147,10 @@ function da_leichtesprache_inhalt_erweitern_am_ende($content) {
         // Der Text, der ans Ende des Inhalts hinzugefügt werden soll
 
 		if ( pll_current_language() == 'leichte-sprache' ) {
-			$zusatztext = '<p> Bilder: © Lebenshilfe für Menschen mit geistiger Behinderung Bremen e.V.,'
-				. 'Illustrator: Stefan Albers, Atelier Fleetinsel, 2013</p>'
-				. '<p>Text: © Büro für Einfache und Leichte Sprache der Lebenshilfe Gießen e.V.,'
-				. 'Übersetzerin: Anja Sandtner, 2024</p>';
+			$zusatztext = '<i><p>Bilder: <br/>© Lebenshilfe für Menschen mit geistiger Behinderung Bremen e.V.,<br/>'
+				. 'Illustrator: <br/>Stefan Albers, <br/>Atelier Fleetinsel, <br/>2013</p>'
+				. '<p>Text: <br/>© Büro für Einfache und Leichte Sprache der Lebenshilfe Gießen e.V.,<br/>'
+				. 'Übersetzerin: <br/>Anja Sandtner, <br/>2024</p></i>';
 			
 			// Den Zusatztext ans Ende des Inhalts hängen
 			$content .= $zusatztext;
