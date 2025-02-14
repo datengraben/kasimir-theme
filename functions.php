@@ -239,8 +239,124 @@ function cb_prevent_subscriber() {
 /*****************************************/
 
 
-/**** BEGIN WARTUNGS_EMAIL *****/
+/***** Begin Admin Summarization *****/
+//add_action( 'commonsbooking_before_item-single', 'da_generate_item_summary' );
+function da_generate_item_summary() {
+	global $post;
+	
+	if (is_user_logged_in() && current_user_can( 'edit_posts' ) ) {
+		
+		$startTime = strtotime( '- 1 days' );
+		$endTime   = strtotime( '+ 1 days' );
+		
+		
+		echo "<h3>Interne Daten</h3>";
+		echo "<h4>Zeitrahmen</h4>";
+		
+		$args = array(
+			'post_type'   => \CommonsBooking\Wordpress\CustomPostType\Timeframe::$postType,
+			'nopaging' => true,
+			'meta_query'  => array(
+				'relation' => 'OR',
+				array(
+					'key'     => \CommonsBooking\Model\Restriction::META_START,
+					'value'   => $startTime,
+					'compare' => '>=',
+					'type'    => 'numeric',
+				),
+				array(
+					'key'     => \CommonsBooking\Model\Restriction::META_END,
+					'value'   => $endTime,
+					'compare' => '<=',
+					'type'    => 'numeric',
+				),
+				array(
+					'key'     => \CommonsBooking\Model\Timeframe::META_ITEM_ID,
+					'value'   => $post->ID,
+					'compare' => '=',
+					'type'    => 'numeric'
+				),
+				array(
+					'key'     => \CommonsBooking\Model\Timeframe::META_ITEM_ID_LIST,
+					'value'   => '' . $post->ID,
+					'compare' => 'LIKE'
+				),
+			),
+		); 
+		
+		$query = new WP_Query( $args );
+		$models = array_map( function( $elem ) {
+			return new \CommonsBooking\Model\Timeframe( $elem );
+		}, $query->posts );
+		
+		foreach ( $models as $model ) {
+			
+			$ids = json_encode( $model->getItems() );
+			
+			echo "<div>{$model->getType()} -- {$model->formattedBookableDate()} -- {$model->getFormattedEndDateTime()} (Location: {$model->getLocationId()}), (Items: {$model->getItemName()}: {$model->getItemId()} und {$ids})</div>";
+			// Brauche hier die getitemsids von Timeframe
+		}
+				
+		
+		echo "<h4>Einschränkungen</h4>";
+		
+		
+		$args = array(
+			'post_type'   => \CommonsBooking\Wordpress\CustomPostType\Restriction::$postType,
+			'nopaging' => true,
+			'meta_query'  => array(
+				'relation' => 'AND',
+				array(
+					'key'     => \CommonsBooking\Model\Restriction::META_START,
+					'value'   => $startTime,
+					'compare' => '>=',
+					'type'    => 'numeric',
+				),
+				array(
+					'key'     => \CommonsBooking\Model\Restriction::META_END,
+					'value'   => $endTime,
+					'compare' => '<=',
+					'type'    => 'numeric',
+				),
+				array(
+					'key'     => \CommonsBooking\Model\Restriction::META_ITEM_ID,
+					'value'   => $post->ID,
+					'compare' => '=',
+					'type'    => 'numeric'
+				),
+			),
+		); 
+	
+		$query = new WP_Query( $args );
+		$models = array_map( function( $elem ) {
+			return new \CommonsBooking\Model\Restriction( $elem );
+		}, $query->posts );
+		
+		
+		foreach ( $models as $model ) {
+			$ids = json_encode( get_post_meta( $model->ID, 'item-id-list') );
+			$idss = json_encode( get_post_meta( $model->ID, 'item-id') );
+			echo "<div>{$model->getFormattedStartDateTime()} -- {$model->getFormattedEndDateTime()} (Location: {$model->getLocationId()}), (Items: {$model->getItemName()}: {$model->getItemId()}) or {$ids} and {$idss}</div>";
+			// Brauche hier die getitemsids von Timeframe
+		}
+	}
+}
 
+/**** BEGIN SPENDEN_EMAIL ******/
+function _generate_spenden_aufruf ( ) {
+	$utm = "?utm_source=dasallrad.org&utm_medium=buchungbestaetigung&utm_campaign=spenden";
+	$utm = "";
+	return "<div id=\"cb_info_mail\" class=\"cb-notice\"> <p>Du möchtest für deine Fahrt etwas spenden? Das kannst du auf unserer <a href=\"https://dasallrad.org/von-vielen-fuer-viele/{$utm}\">Spenden-Seite</a> tun.</p></div>";
+}
+
+add_action( 'commonsbooking_after_booking-single', 'da_add_spendenaufruf' );
+function da_add_spendenaufruf() {
+	echo _generate_spenden_aufruf();
+}
+
+/**** END SPENDEN_EMAIL *****/
+
+/**** BEGIN WARTUNGS_EMAIL *****/
 function _generate_wartung( $itemName, $bookingUrl ) {
 	
 	$url = "";
