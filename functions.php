@@ -608,6 +608,43 @@ function dasallrad_erste_buchung() {
 	}
 }
 
+// Fügt einen eigenen Reiter im Theme customizer hinzu:
+// See https://developer.wordpress.org/themes/customize-api/customizer-objects/
+function mytheme_customize_register($wp_customize) {
+    // Add Section
+    $wp_customize->add_section('banner_settings', array(
+        'title' => __('Banner Einstellungen', 'dasallrad-kasimir-theme'),
+        'description' => 'Edit the site-wide banner',
+        'priority' => 30,
+    ));
+
+    // Add Setting for Banner Text
+    $wp_customize->add_setting('banner_text', array(
+        'default' => 'Welcome to our <a href="">website!</a>',
+        //'sanitize_callback' => 'sanitize_text_field',
+    ));
+	
+	$wp_customize->add_setting('banner_active', array(
+        'default' => false
+    ));
+	
+	
+	$wp_customize->add_control( 'banner_active', array(
+	  'type' => 'checkbox',
+	  'section' => 'banner_settings', // Required, core or custom.
+	  'label' => __( 'Aktiv' ),
+	  'description' => __( 'Aktiviert das Banner auf der Homepage oder nicht.' ),
+	) );
+
+    // Add Control for Banner Text
+    $wp_customize->add_control('banner_text', array(
+        'label' => __('Banner Text', 'mytheme'),
+        'section' => 'banner_settings',
+        'type' => 'text',
+    ));
+}
+add_action('customize_register', 'mytheme_customize_register');
+
 
 /**
  * Implement the Custom Header feature.
