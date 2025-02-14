@@ -119,6 +119,16 @@ function kasimir_widgets_init() {
 }
 add_action( 'widgets_init', 'kasimir_widgets_init' );
 
+/*add_filter( 'parse_query', function( $query ) {
+    global $pagenow;
+    if ( $pagenow === 'edit.php' && isset( $_GET['cb_items_category'] ) ) {
+        $query->query_vars['post_type'] = 'cb_item';
+    }
+
+    if ( $pagenow === 'edit.php' && isset( $_GET['cb_locations_category'] ) ) {
+        $query->query_vars['post_type'] = 'cb_location';
+    }
+});*/
 
 add_filter('edit_profile_url', 'my_edit_profile_url', 10, 3);
 function my_edit_profile_url($url, $user_id, $scheme) {
