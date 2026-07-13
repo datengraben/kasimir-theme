@@ -821,10 +821,15 @@ a:hover, a:focus, a:active {
   color: white;
 }
 .menu-toggle .menu-toggle-text {
-  display: inline-block;
-  vertical-align: middle;
-  color: #000000;
-  display: none;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 .menu-toggle:hover, .menu-toggle:focus {
   background-color: transparent;
