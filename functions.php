@@ -62,7 +62,7 @@ function kasimir_setup() {
 	) );
 
 	// Add styles to the post editor
-	add_editor_style( array( 'editor-style.css', kasimir_font_url() ) );
+	add_editor_style( 'editor-style.css' );
 
 	// add image size for logo
 	add_image_size('kasimir-logo', 160, 140);

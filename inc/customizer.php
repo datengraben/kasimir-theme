@@ -28,7 +28,8 @@ function kasimir_customize_register( $wp_customize ) {
     $wp_customize->add_setting(
         'kasimir_copyright_text',
         array(
-            'default' => ''
+            'default'           => '',
+            'sanitize_callback' => 'kasimir_sanitize_customizer_text',
         )
     );
     $wp_customize->add_control(
@@ -38,7 +39,6 @@ function kasimir_customize_register( $wp_customize ) {
             'description' => esc_html__( 'The copyright text will be displayed beneath the menu in the footer.', 'kasimir-theme' ),
             'section'     => 'kasimir_footer_section',
             'type'        => 'text',
-            'sanitize'    => 'html'
         )
     );
 }

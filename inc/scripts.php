@@ -6,29 +6,6 @@
  */
 
 /**
- * Register Google font.
- *
- * @link http://themeshaper.com/2014/08/13/how-to-add-google-fonts-to-wordpress-themes/
- */
-function kasimir_font_url() {
-
-	$fonts_url = '';
-
-	$font_families = array(
-		'Karla:400,400italic,700,700italic',
-		'Open Sans:400,300,700',
-		'Cousine:400,700,400italic,700italic'
-	);
-
-	$query_args = array(
-		'family' => urlencode( implode( '|', $font_families ) ),
-	);
-	
-	$fonts_url = add_query_arg( $query_args, '//fonts.googleapis.com/css' );
-	return $fonts_url;
-}
-
-/**
  * Enqueue scripts and styles.
  */
 function kasimir_scripts() {
@@ -40,19 +17,14 @@ function kasimir_scripts() {
 	/**
 	 * If we are debugging the site, use a unique version every page load so as to ensure no cache issues.
 	 */
-	$version = '1.0.0';
+	$version = wp_get_theme()->get( 'Version' );
 
 	/**
 	 * Should we load minified files?
 	 */
 	$suffix = ( true === $debug ) ? '' : '.min';
 
-	// Register styles.
-	wp_register_style( 'kasimir-google-font', kasimir_font_url(), array(), null );
-
 	// Enqueue styles.
-	wp_enqueue_style( 'kasimir-google-font' );
-	wp_enqueue_style( 'animate.css' );
 	wp_enqueue_style( 'kasimir-style', get_stylesheet_directory_uri() . '/style' . $suffix . '.css', array(), $version );
 
 	// Enqueue scripts.
