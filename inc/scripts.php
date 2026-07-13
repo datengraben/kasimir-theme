@@ -48,7 +48,6 @@ function kasimir_scripts() {
 	$suffix = ( true === $debug ) ? '' : '.min';
 
 	// Enqueue styles.
-	wp_enqueue_style( 'animate.css' );
 	wp_enqueue_style( 'kasimir-style', get_stylesheet_directory_uri() . '/style' . $suffix . '.css', array(), $version );
 
 	// Enqueue scripts.
