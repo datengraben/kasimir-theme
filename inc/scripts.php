@@ -47,11 +47,7 @@ function kasimir_scripts() {
 	 */
 	$suffix = ( true === $debug ) ? '' : '.min';
 
-	// Register styles.
-	wp_register_style( 'kasimir-google-font', kasimir_font_url(), array(), null );
-
 	// Enqueue styles.
-	wp_enqueue_style( 'kasimir-google-font' );
 	wp_enqueue_style( 'animate.css' );
 	wp_enqueue_style( 'kasimir-style', get_stylesheet_directory_uri() . '/style' . $suffix . '.css', array(), $version );
 

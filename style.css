@@ -296,19 +296,19 @@ textarea {
 
 h1,
 .h1 {
-  font-family: "Nunito", "AshleyScriptMT", sans-serif;
+  font-family: "Nunito", sans-serif;
   color: #64A600;
 }
 
 h2, h2 a,
 .h2, h2 a {
-  font-family: "Nunito", "AshleyScriptMT", sans-serif;
+  font-family: "Nunito", sans-serif;
   color: #BC1579;
 }
 
 h3,
 .h3 {
-  font-family: "Nunito", "AshleyScriptMT", sans-serif;
+  font-family: "Nunito", sans-serif;
 }
 
 h2 a:after {
@@ -773,7 +773,7 @@ body.ready .not-ready {
 
 .site-title {
   font-size: 1.5rem;
-  font-family: "Nunito", "AshleyScriptMT", sans-serif;
+  font-family: "Nunito", sans-serif;
   text-transform: uppercase;
   line-height: 1.1em;
   margin-left: 0;
@@ -900,7 +900,7 @@ a:hover, a:focus, a:active {
   display: inline-block;
 }
 .menu[aria-expanded=false] {
-  font-family: "Nunito", "AshleyScriptMT", sans-serif;
+  font-family: "Nunito", sans-serif;
   text-transform: uppercase;
   line-height: 1.1em;
 }
@@ -1352,7 +1352,7 @@ textarea {
 .widgets-footer.widgets-footer-bottom .widget-title {
   font-size: 1em;
   transform: rotate(0deg);
-  font-family: "Nunito", "AshleyScriptMT", sans-serif;
+  font-family: "Nunito", sans-serif;
   text-transform: none;
 }
 .widgets-footer.widgets-footer-bottom img, .widgets-footer.widgets-footer-bottom .icon {
@@ -1479,7 +1479,7 @@ textarea {
 
 .rotatedheadline, .imageheadline, div.articlegrid div div a span, .bx-wrapper .bx-caption, h1, h2, h3 {
   transform: rotate(-1deg);
-  font-family: "Nunito", "AshleyScriptMT", sans-serif;
+  font-family: "Nunito", sans-serif;
   text-transform: uppercase;
   line-height: 1.1em;
 }
