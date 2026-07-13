@@ -6,29 +6,6 @@
  */
 
 /**
- * Register Google font.
- *
- * @link http://themeshaper.com/2014/08/13/how-to-add-google-fonts-to-wordpress-themes/
- */
-function kasimir_font_url() {
-
-	$fonts_url = '';
-
-	$font_families = array(
-		'Karla:400,400italic,700,700italic',
-		'Open Sans:400,300,700',
-		'Cousine:400,700,400italic,700italic'
-	);
-
-	$query_args = array(
-		'family' => urlencode( implode( '|', $font_families ) ),
-	);
-	
-	$fonts_url = add_query_arg( $query_args, '//fonts.googleapis.com/css' );
-	return $fonts_url;
-}
-
-/**
  * Enqueue scripts and styles.
  */
 function kasimir_scripts() {
