@@ -40,7 +40,7 @@ function kasimir_scripts() {
 	/**
 	 * If we are debugging the site, use a unique version every page load so as to ensure no cache issues.
 	 */
-	$version = '1.0.0';
+	$version = wp_get_theme()->get( 'Version' );
 
 	/**
 	 * Should we load minified files?
